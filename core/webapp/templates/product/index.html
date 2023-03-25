@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Product{% endblock %}
+{% block menu %}
+    {% if user.is_authenticated %}
+        <li class="nav-item">
+            <a class="nav-link" aria-current="page" href="{% url 'personal' user.pk %}">
+                <button type="button" class="btn btn-dark">Личный кабинет</button>
+            </a>
+        </li>
+        {% if perms.webapp.change_product %}
+            <li class="nav-item">
+                <a class="nav-link" aria-current="page" href="{% url 'add_product' %}">
+                    <button type="button" class="btn btn-dark">Add Product</button>
+                </a>
+            </li>
+        {% endif %}
+    {% endif %}
+{% endblock %}
+{% block content %}
+    <div class="container cont">
+        <div class="row row-cols-1 row-cols-md-2 g-4">
+            {% for product in products %}
+                <div class="col-md-3">
+                    <div class="card">
+                        {% if product.image %}
+                            <img src="{{ product.image.url }}" class="image" alt="{{ product.image.url }}">
+                        {% else %}
+                            <img src="{% static 'img/sss.png' %}" alt="...">
+                        {% endif %}
+                        <div class="card-body">
+                            <h4 class="card-title">{{ product.title }}</h4>
+                            <p class="card-text">Категория: {{ product.get_category_display }}</p>
+                            <p class="card-text">Оценка: {{ product.get_avg.grade__avg }}</p>
+                            <a href="{% url 'detail_product' product.pk %}" class="btn btn-info">More...</a>
+                        </div>
+                    </div>
+                </div>
+            {% empty %}
+                <h1 class="empty">Товары не найдены</h1>
+            {% endfor %}
+        </div>
+        <br>
+        {% include 'partial/pagination.html' %}
+    </div>
+{% endblock %}
