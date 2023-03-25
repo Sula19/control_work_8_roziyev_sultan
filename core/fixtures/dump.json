@@ -1,0 +1,82 @@
+[
+{
+  "model": "webapp.review",
+  "pk": 4,
+  "fields": {
+    "author": 4,
+    "product": 1,
+    "text": "Пк нормальный, тянет практически все, рекомендую.",
+    "grade": 4
+  }
+},
+{
+  "model": "webapp.review",
+  "pk": 15,
+  "fields": {
+    "author": 3,
+    "product": 3,
+    "text": "Хороший телефон, рекомендую",
+    "grade": 4
+  }
+},
+{
+  "model": "webapp.review",
+  "pk": 16,
+  "fields": {
+    "author": 7,
+    "product": 2,
+    "text": "Хороший телефон, все нравиться, советую.",
+    "grade": 5
+  }
+},
+{
+  "model": "webapp.review",
+  "pk": 17,
+  "fields": {
+    "author": 5,
+    "product": 3,
+    "text": "Телефон не очень, купите лучше что ни будь другое.",
+    "grade": 2
+  }
+},
+{
+  "model": "webapp.review",
+  "pk": 18,
+  "fields": {
+    "author": 3,
+    "product": 1,
+    "text": "Пк офигенный, всем рекомендую",
+    "grade": 5
+  }
+},
+{
+  "model": "webapp.product",
+  "pk": 1,
+  "fields": {
+    "title": "PC i5 FAST",
+    "category": "Pc",
+    "description": "Intel Core i5 2nd Gen, 8 GB, NVIDIA GT710 2GB, HDD (Hard Disk Drive), Casual Computing, Engineering Coding, Gaming, Graphic Design, Industrial, Office, Windows 10",
+    "image": "img/images.jpeg"
+  }
+},
+{
+  "model": "webapp.product",
+  "pk": 2,
+  "fields": {
+    "title": "iPhone 14",
+    "category": "Smartphone",
+    "description": "160.8 x 78.1 x 7.8mm , 5G Single SIM, Water resistant IP68, Wide, Ultra-Wide, 128/256/512 GB",
+    "image": "img/Apple-iPhone-14_FINAL_featured-image-packshot-review.jpg"
+  }
+},
+{
+  "model": "webapp.product",
+  "pk": 3,
+  "fields": {
+    "title": "SAMSUNG S23",
+    "category": "Smartphone",
+    "description": "SAMSUNG SM S 918 Galaxy S23 Ultra 5G 512GB BZGHS (Green), 512 ГБ",
+    "image": "img/149c81eb-a264-11ed-a254-005056b6dbd7-480_63MIiUo.webp"
+  }
+}
+]
