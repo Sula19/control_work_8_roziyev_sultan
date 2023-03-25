@@ -1,0 +1,85 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Detail{% endblock %}
+{% block menu %}
+    {% if user.is_authenticated %}
+        {% if perms.webapp.change_product %}
+            <li class="nav-item">
+                <a class="nav-link" aria-current="page" href="{% url 'update_product' product.pk %}">
+                    <button type="button" class="btn btn-dark">Редактировать</button>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" aria-current="page" href="{% url 'delete_product' product.pk %}">
+                    <button type="button" class="btn btn-dark">Удалить</button>
+                </a>
+            </li>
+        {% endif %}
+        <li class="nav-item">
+            <a class="nav-link" aria-current="page" href="{% url 'add_review' product.pk %}">
+                <button type="button" class="btn btn-dark   ">Добавить отзыв</button>
+            </a>
+        </li>
+    {% endif %}
+{% endblock %}
+{% block content %}
+    <div class="container cont">
+        <div class="card" style="max-width: 100%;">
+            <div class="row g-0">
+                <div class="col-md-4">
+                    {% if product.image %}
+                        <img src="{{ product.image.url }}" class="img-fluid rounded-start" alt="{{ product.image.url }}">
+                    {% else %}
+                        <img src="{% static 'img/sss.png' %}" class="img-fluid rounded-start" alt="...">
+                    {% endif %}
+                </div>
+                <div class="col-md-8">
+                    <div class="card-body">
+                        <h1 class="card-title">{{ product.title }}</h1><br>
+                        <h4 class="card-title">{{ product.description }}</h4><br>
+                        <h4 class="card-title">Категория - {{ product.get_category_display }}</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br>
+        <h3>Отзывы товара - {{ product.title }}:</h3><br>
+        <h4>Средняя оценка -
+            {% if product.get_avg.grade__avg %}
+                {{ product.get_avg.grade__avg }}:
+            {% else %}
+                0:
+            {% endif %}
+        </h4><br>
+        {% for review in product.review_product.all %}
+            <div class="row row-cols-1 row-cols-md-2 g-4">
+                <div class="col">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Имя: {{ review.author.username }}</h5>
+                            <h5 class="card-title">Почта: {{ review.author.email }}</h5>
+                            <p class="card-text">Отзыв: {{ review.text }}</p>
+                            <p class="card-text">Оценка: {{ review.grade }}</p>
+                            {% if review.author == request.user or perms.webapp.change_review %}
+                                <div class="btn-group" role="group">
+                                    <a href="{% url 'update_review' review.pk %}">
+                                        <button class="btn btn-success">Редактировать</button>
+                                    </a>
+                                    <form action="{% url 'delete_review' review.pk %}" method="post">
+                                        {% csrf_token %}
+                                        <a href="{% url 'delete_review' review.pk %}">
+                                            <button class="btn btn-danger">Удалить</button>
+                                        </a>
+                                    </form>
+                                </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div><br>
+        {% empty %}
+            <h3>Нет отзывов</h3>
+        {% endfor %}
+        {#        {% include 'partial/pagination.html' %}#}
+    </div>
+{% endblock %}

@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block title %}Delete Product{% endblock %}
+{% block content %}
+    <div class="container cont">
+        <h3>Вы действительно хотите удалить продукт {{ product.title }}?</h3><br>
+        <div class="btn-group" role="group">
+            <form method="post">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-warning">Да</button>
+            </form>
+            <a href="{% url 'index' %}">
+                <button type="submit" class="btn btn-success" style="margin-left: 10px">Нет</button>
+            </a>
+        </div>
+    </div>
+{% endblock %}

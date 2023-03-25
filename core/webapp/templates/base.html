@@ -1,0 +1,44 @@
+{% load static %}
+{% load django_bootstrap5 %}
+{% bootstrap_css %}
+{% bootstrap_javascript %}
+{% bootstrap_messages %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <title>{% block title %}Home{% endblock %}</title>
+</head>
+<body>
+<nav class="navbar">
+    <div class="container">
+        <a class="navbar-brand" href="{% url 'index' %}">Products</a>
+        <ul class="nav justify-content-end">
+            {% if user.is_authenticated %}
+                <li class="nav-item">
+                    <a class="nav-link" aria-current="page" href="{% url 'logout' %}">
+                        <button type="button" class="btn btn-dark">Выйти</button>
+                    </a>
+                </li>
+            {% else %}
+                <li class="nav-item">
+                    <a class="nav-link" aria-current="page" href="{% url 'login' %}">
+                        <button type="button" class="btn btn-dark">Войти</button>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" aria-current="page" href="{% url 'register' %}">
+                        <button type="button" class="btn btn-dark">Зарегестрироваться</button>
+                    </a>
+                </li>
+            {% endif %}
+            {% block menu %}{% endblock %}
+        </ul>
+    </div>
+</nav>
+<div>
+    {% block content %}{% endblock %}
+</div>
+</body>
+</html>
