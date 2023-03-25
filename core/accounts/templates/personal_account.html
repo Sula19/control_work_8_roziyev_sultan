@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% block title %}Personal Account{% endblock %}
+{% block menu %}
+    <li class="nav-item">
+        <a class="nav-link" aria-current="page" href="{% url 'change' user_obj.pk %}">
+            <button type="button" class="btn btn-dark">Редактировать</button>
+        </a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" aria-current="page" href="{% url 'change_password' user_obj.pk %}">
+            <button type="button" class="btn btn-dark">Смена пароля</button>
+        </a>
+    </li>
+{% endblock %}
+{% block content %}
+    <div class="container cont">
+        <div class="row d-flex justify-content-start">
+            <div class="col-7 card text-bg-light form-margins">
+                <h2>Личная страница {{ user_obj.username }}</h2><br>
+                <h4>Логин: {{ user_obj.username }}</h4><br>
+                <h4>Почта: {{ user_obj.email }}</h4><br>
+                <h4>Имя: {{ user_obj.first_name }}</h4><br>
+                <h4>Фамилия: {{ user_obj.last_name }}</h4><br>
+            </div>
+        </div>
+    </div>
+{% endblock %}
