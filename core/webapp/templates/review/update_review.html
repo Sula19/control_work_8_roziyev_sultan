@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block title %}Update Review{% endblock %}
+{% block content %}
+    <div class="container cont">
+        <div class="row d-flex justify-content-center">
+            <div class="col-7 card text-bg-light form-margins">
+                <h2>Редактирование отзыва</h2>
+                <form method="post" enctype="multipart/form-data">
+                    {% include 'partial/create_or_update.html' with button='Редактировать отзыв' %}
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}
